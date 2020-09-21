@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App =()=>{
+
+  const [item,newItem] =useState();
+  const [items,itemList] = useState([]);
+  const itemEvent = (event) =>{
+console.log (event.target.value);
+newItem(event.target.value);
+  }
+  const storeValue= () => {
+
+    itemList ((oldValue)=>{
+      return [...oldValue,item]
+    });
+    newItem('');
+  };
+
+return(
+  <>
+  <div className="main_div">
+  <div className="center_div"> 
+<h1>ToDo List</h1>
+<br />
+<input type ="text" placeholder="Add the items" onChange={itemEvent}
+value={item} />
+<button onClick={storeValue}> + </button>
+<br />
+<ul>
+{
+ items.map((itemNumber)=>{
+   return (
+   <div className="list">
+   <li class="fas fa-window-close" > {itemNumber}</li>
+   </div>
+   );
+ }) }
+
+</ul>
+</div>
+</div>
+</>
+)
 }
 
 export default App;
